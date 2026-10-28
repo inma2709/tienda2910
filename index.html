@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TecnoAula · JavaScript controla la página</title>
+
+  <!-- Archivo de estilos -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- defer permite cargar el HTML antes de ejecutar JavaScript -->
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+
+  <!-- =====================================
+       CABECERA DE LA TIENDA
+  ====================================== -->
+
+  <header class="cabecera">
+
+    <div class="contenedor cabecera-interior">
+
+      <a class="marca" href="#inicio">
+        Tecno<span>Aula</span>
+      </a>
+
+      <span class="etiqueta">Práctica JavaScript</span>
+
+    </div>
+
+  </header>
+
+
+  <main id="inicio" class="contenedor">
+
+    <!-- =====================================
+         RETO 1 · SALUDO SEGÚN LA HORA
+    ====================================== -->
+
+    <section class="bienvenida">
+
+      <p class="sobrelinea">TU TIENDA DE INFORMÁTICA</p>
+
+      <!-- JavaScript cambiará este título según la hora -->
+      <h1 id="saludo">Bienvenido a TecnoAula</h1>
+
+      <p id="mensaje-tienda">
+        Encuentra los mejores accesorios para tu ordenador.
+      </p>
+
+
+      <!-- =====================================
+           RETO 2 · PROMOCIONES INTERACTIVAS
+      ====================================== -->
+
+      <section class="promociones">
+
+        <h2>Descubre nuestras promociones</h2>
+
+        <!--
+          Ambos botones ejecutan la misma función,
+          pero cada uno envía un argumento diferente.
+        -->
+
+        <button
+          type="button"
+          onclick="mostrarPromocion('ofertas')">
+          Ver productos en oferta
+        </button>
+
+        <button
+          type="button"
+          onclick="mostrarPromocion('destacados')">
+          Ver productos destacados
+        </button>
+
+        <!--
+          JavaScript mostrará aquí el mensaje
+          correspondiente al botón pulsado.
+
+          Utilizaremos innerHTML.
+        -->
+        <div id="promocion"></div>
+
+      </section>
+
+    </section>
+
+
+    <!-- =====================================
+         CATÁLOGO Y CARRITO
+    ====================================== -->
+
+    <div class="distribucion">
+
+
+      <!-- =====================================
+           RETO 3 · CATÁLOGO DE PRODUCTOS
+      ====================================== -->
+
+      <section class="productos">
+
+        <div class="encabezado">
+
+          <div>
+
+            <p class="sobrelinea">EQUIPA TU ESCRITORIO</p>
+
+            <h2>Nuestro catálogo</h2>
+
+          </div>
+
+          <!-- JavaScript actualizará el número de productos -->
+          <p class="contador">
+            Productos: <strong id="contador-productos">0</strong>
+          </p>
+
+        </div>
+
+
+        <!--
+          RETO 3: GENERAR EL CATÁLOGO
+
+          Tenemos un array de objetos en JavaScript.
+
+          Recorreremos ese array con for...of
+          para mostrar una tarjeta por cada producto.
+
+          Cada tarjeta tendrá:
+          - Un icono
+          - El nombre del producto
+          - Su categoría
+          - Su precio
+
+          Utilizaremos innerHTML y plantillas literales.
+        -->
+
+        <div id="catalogo" class="catalogo">
+
+          <p class="vacio">
+            El catálogo aparecerá cuando completes el reto 3.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           PRÓXIMA FASE · CARRITO DE COMPRA
+      ====================================== -->
+
+      <aside class="carrito">
+
+        <div class="encabezado-carrito">
+
+          <h2>Mi carrito</h2>
+
+          <span>🛒</span>
+
+        </div>
+
+        <p class="ayuda">
+          Lo programaremos en la siguiente fase.
+        </p>
+
+        <!--
+          Aquí aparecerán los productos
+          que el usuario añada al carrito.
+        -->
+        <div id="lista-carrito">
+
+          <p class="vacio">
+            Todavía no hay productos añadidos.
+          </p>
+
+        </div>
+
+        <!--
+          JavaScript calculará el total
+          de los productos seleccionados.
+        -->
+        <div class="total">
+
+          <strong>Total</strong>
+
+          <strong id="total-carrito">0 €</strong>
+
+        </div>
+
+       
+<!-- RETO 9 · FINALIZAR COMPRA -->
+
+<button type="button" onclick="finalizarCompra()">
+  Finalizar compra
+</button>
+
+<!-- Aquí mostraremos el resultado de la compra -->
+<p id="mensaje-compra"></p>
+
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================
+       PIE DE PÁGINA
+  ====================================== -->
+
+  <footer class="pie">
+    TecnoAula · Aprender JavaScript creando una página real
+  </footer>
+
+</body>
+</html>

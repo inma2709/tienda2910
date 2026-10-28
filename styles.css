@@ -1,0 +1,142 @@
+
+/* ESTILOS GENERALES */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f1f5f9;
+  color: #243447;
+}
+
+.contenedor {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+button {
+  background-color: #177c45;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+/* hover significa que el botón cambia de color al pasar el ratón */
+button:hover {
+  background-color: #7e550a;
+}
+
+/* CABECERA */
+
+.cabecera {
+  background-color: #1e293b;
+  color: white;
+}
+
+.cabecera-interior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marca {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+/* BIENVENIDA */
+
+.bienvenida {
+  background-color: #1e3a5f;
+  color: white;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.sobrelinea {
+  font-size: 12px;
+}
+
+/* PROMOCIONES */
+
+.promociones {
+  background-color: white;
+  color: #243447;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+#promocion {
+  margin-top: 15px;
+}
+
+/* CATÁLOGO Y CARRITO */
+
+.distribucion {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.productos,
+.carrito {
+  background-color: white;
+  padding: 20px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TARJETAS */
+
+.catalogo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.tarjeta {
+  background-color: #f8fafc;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.icono-producto {
+  font-size: 35px;
+}
+
+.precio {
+  color: green;
+  font-weight: bold;
+}
+
+/* CARRITO */
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding: 15px 0;
+}
+
+/* PIE DE PÁGINA */
+
+.pie {
+  text-align: center;
+  padding: 20px;
+}
+
+/* MÓVILES */
+
+@media (max-width: 700px) {
+  .distribucion,
+  .catalogo {
+    grid-template-columns: 1fr;
+  }
+}
