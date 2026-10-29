@@ -9,7 +9,7 @@ mejorar su página web.
 
 La tienda ya tiene su estructura HTML y su diseño CSS,
 pero todavía no tiene las funcionalidades necesarias
-para que los clientes puedan interactuar con ella.
+para que los clientes puedan interactuar con ella. Js le da vida.
 
 **Tu misión será darle vida utilizando JavaScript.**
 
