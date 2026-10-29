@@ -72,7 +72,7 @@ button:hover {
   margin-top: 15px;
 }
 
-/* CATÁLOGO Y CARRITO */
+/* CATÁLOGO Y CARRITO  en columnas*/
 
 .distribucion {
   display: grid;
