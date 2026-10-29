@@ -34,7 +34,7 @@ const productos = [
 
 
 // ==========================================
-// RETO 1 · SALUDO SEGÚN LA HORA
+// RETO 1 · SALUDO PERSONALIZADO SEGÚN LA HORA
 // ==========================================
 
 // OBJETIVO:
