@@ -4,8 +4,10 @@
 // ==========================================
 
 
+// ==========================================
 // DATOS DE NUESTRA TIENDA
 // Cada objeto representa un producto.
+// ==========================================
 
 const productos = [
   { id: 1, nombre: "Teclado", precio: 35, categoria: "Periféricos", icono: "⌨️" },
@@ -66,65 +68,55 @@ function mostrarPromocion(tipo) {
 }
 
 
+// ==========================================
+// RETO 3 · GENERAR EL CATÁLOGO
+// ==========================================
 
 /*
-==========================================
-RETO 3 · GENERAR EL CATÁLOGO
-==========================================*/
+PRIMERA VERSIÓN
 
-/* PRIMERA VERSIÓN
-Mostramos los productos sin botones de compra.*/
+Mostramos los productos sin botones de compra.
 
-// function mostrarProductos() {
+Esta versión queda comentada porque después
+la sustituimos por la versión con botones.
+*/
 
-//   /*1. Seleccionamos el contenedor del catálogo.*/
-//   const catalogo = document.querySelector("#catalogo");
+/*
+function mostrarProductos() {
 
-  /*2. Vaciamos su contenido anterior.
-  Así evitamos duplicar las tarjetas.
-  catalogo.innerHTML = "";*/
+  const catalogo = document.querySelector("#catalogo");
 
-  /*3. Recorremos el array de productos.
-  En cada vuelta, producto es un objeto diferente.*/
-//   for (const producto of productos) { 
+  // Vaciamos el contenido anterior.
+  catalogo.innerHTML = "";
 
-//     /*4. Creamos una tarjeta HTML para cada producto.
-//     Utilizamos una plantilla literal para
-//     introducir los datos del objeto.*/
+  // Recorremos el array de productos.
+  for (const producto of productos) {
 
-//     catalogo.innerHTML += `
-//       <article class="tarjeta">
+    catalogo.innerHTML += `
+      <article class="tarjeta">
 
-//         <div class="icono-producto">
-//           ${producto.icono}
-//         </div>
+        <div class="icono-producto">
+          ${producto.icono}
+        </div>
 
-//         <h3>${producto.nombre}</h3>
+        <h3>${producto.nombre}</h3>
 
-//         <p class="categoria">
-//           ${producto.categoria}
-//         </p>
+        <p class="categoria">
+          ${producto.categoria}
+        </p>
 
-//         <p class="precio">
-//           ${producto.precio} €
-//         </p>
+        <p class="precio">
+          ${producto.precio} €
+        </p>
 
-//       </article>
-//     `;
-//   }
+      </article>
+    `;
+  }
 
-//   /*5. Seleccionamos el contador de productos.*/
-//   const contador = document.querySelector("#contador-productos");
-
-//   /*Mostramos la cantidad de productos del array.*/
-//   contador.textContent = productos.length;
-// }
-
-/*Ejecutamos la función al cargar la página.*/
-mostrarProductos();
-
-
-
+  const contador = document.querySelector("#contador-productos");
+  contador.textContent = productos.length;
+}
+*/
 
 
 // ==========================================
@@ -132,11 +124,8 @@ mostrarProductos();
 // ==========================================
 
 // SEGUNDA VERSIÓN DE mostrarProductos().
-//
-// Es la misma función del reto 3,
-// pero añadimos un botón a cada tarjeta.
-//
-// Esta es la versión que dejamos activa.
+// Añadimos un botón a cada tarjeta.
+// Esta es la versión activa.
 
 function mostrarProductos() {
 
@@ -159,11 +148,13 @@ function mostrarProductos() {
 
         <h3>${producto.nombre}</h3>
 
-        <p class="categoria">${producto.categoria}</p>
+        <p class="categoria">
+          ${producto.categoria}
+        </p>
 
-        <p class="precio">${producto.precio} €</p>
-
-       
+        <p class="precio">
+          ${producto.precio} €
+        </p>
 
         <button onclick="agregarCarrito(${producto.id})">
           Añadir al carrito 🛒
@@ -178,7 +169,6 @@ function mostrarProductos() {
   contador.textContent = productos.length;
 }
 
-
 mostrarProductos();
 
 
@@ -186,17 +176,9 @@ mostrarProductos();
 // RETO 5 · AÑADIR PRODUCTOS AL CARRITO
 // ==========================================
 
-// Creamos un array vacío para guardar la compra lo declaramos como let para poder modificarlo.
-let carrito = [];
-/*comprueba si en local existe MicarritoGuardado*/
-let guardado= localStorage.getItem("MicarritoGuardado");
-// Si encontramos datos, los convertimos en un array.
-// local lo guarda como un string, por eso tenemos que convertirlo a un array con JSON.parse() 
-if (guardado !== null) {
-  carrito = JSON.parse(guardado);
-}
-// cuando lo traemos del navegador a js
+// Creamos un array vacío para guardar la compra.
 
+let carrito = [];
 
 function agregarCarrito(id) {
 
@@ -208,17 +190,11 @@ function agregarCarrito(id) {
     carrito.push(producto);
   }
 
-  localStorage.setItem(
-    "MicarritoGuardado",
-    JSON.stringify(carrito)
-  );
-
   console.log(carrito);
 
+  // Actualizamos el carrito y el total.
   mostrarCarrito();
   calcularTotal();
-
-  
 }
 
 
@@ -229,28 +205,29 @@ function agregarCarrito(id) {
 function mostrarCarrito() {
 
   // Localizamos la zona del carrito.
-  const lista = document.querySelector("#lista-carrito"); 
+  const lista = document.querySelector("#lista-carrito");
 
-  //limpiamos el carrito para que no repita los productos
+  // Limpiamos para que no se repitan los productos.
+  lista.innerHTML = "";
 
-lista.innerHTML = "";
-
-
-  // Recorremos el carrito utilizando un índice.  
+  // Recorremos el carrito utilizando un índice.
   for (let i = 0; i < carrito.length; i++) {
+
     const producto = carrito[i];
+
     lista.innerHTML += `
       <p>
-        ${producto.nombre} - ${producto.precio} €        
+        ${producto.nombre} - ${producto.precio} €
 
-     
-      <button onclick="eliminarCarrito(${i})">Eliminar ❌</button>
+        <button onclick="eliminarCarrito(${i})">
+          Eliminar ❌
+        </button>
       </p>
-    `;  }  
+    `;
+  }
 }
 
- /*aqui añadimos el botón para eliminar el producto; este botón elimina con la posicion
-      en el array por eso tenemos que recorrer con un for clasico que nos da el indice en el carrito */
+
 // ==========================================
 // RETO 7 · CALCULAR EL TOTAL
 // ==========================================
@@ -270,10 +247,8 @@ function calcularTotal() {
 
   resultado.textContent = total + " €";
 
-  console.log(total); 
+  console.log(total);
 }
-
-
 
 
 // ==========================================
@@ -283,15 +258,12 @@ function calcularTotal() {
 function eliminarCarrito(posicion) {
 
   // Eliminamos un elemento del array.
-  carrito.splice(posicion,1);
+  carrito.splice(posicion, 1);
 
   // Volvemos a mostrar el carrito y el total.
   mostrarCarrito();
   calcularTotal();
- 
 }
-
-
 
 
 // ==========================================
@@ -304,68 +276,84 @@ function finalizarCompra() {
   const mensaje = document.querySelector("#mensaje-compra");
 
   // Mostramos la confirmación.
-mensaje.textContent="Tu compra se ha finalizado. Gracias por tu compra."
+  mensaje.textContent =
+    "Tu compra se ha finalizado. Gracias por tu compra.";
 }
+
 
 // ==========================================
 // MOSTRAR EL CARRITO AL ABRIR LA PÁGINA
 // ==========================================
 
-// Mostramos los productos recuperados de localStorage.
+// Al principio el carrito está vacío.
 mostrarCarrito();
-
-// Calculamos el total de esos productos.
 calcularTotal();
 
 
-//==========================================
-/*CREAR ELEMENTO CON CREATE ELEMENT*/
-/*creamos el elemento con la etiqueta html que queramos*/
+// ==========================================
+// CREAR ELEMENTOS CON createElement
+// ==========================================
 
-const novedades= document.createElement("h3");
-/*le damos la clase de css  h3*/
-novedades.className="h3";
-const productosNuevos=document.createElement("p");
-/*le damos contenido a los elementos*/
-productosNuevos.textContent="No te pierdas nuestras novedades que te facilitarán la vida.";
-novedades.textContent="Nuestros productos más recientes";
-/*nos enganchamos al nodo de html donde nos queremos posicionar*/
-const contenedor= document.querySelector(".productos");
-/*añadimos los elementos al contenedor*/
-contenedor.append(novedades,productosNuevos);
+// Creamos los elementos HTML.
+const novedades = document.createElement("h3");
 
-//====================================
-/*BUSCADOR DE PRODUCTOS EN EL ARRAY DE PRODUCTOS CON EL METODO FIND POR NOMBRE*/
-/*USA LOWER CASE Y TRIM NORMALIZA Y BUSCA EL NOMBRE DEL PRODUCTO EN EL ARRAY */
-/*DEVUELVE SOLO SI HAS ENCONTRADO EL PRODUCTO Y SI NO PON TU PRODUCTO NO ENCONTRADO */
+const productosNuevos = document.createElement("p");
+
+// Asignamos una clase CSS.
+novedades.className = "h3";
+
+// Añadimos contenido a los elementos.
+productosNuevos.textContent =
+  "No te pierdas nuestras novedades que te facilitarán la vida.";
+
+novedades.textContent = "Nuestros productos más recientes";
+
+// Seleccionamos el contenedor HTML.
+const contenedor = document.querySelector(".productos");
+
+// Añadimos los elementos al contenedor.
+contenedor.append(novedades, productosNuevos);
+
+
+// ==========================================
+// BUSCADOR DE PRODUCTOS
+// ==========================================
+
+/*
+Buscamos un producto por su nombre.
+
+Utilizamos:
+- find()
+- toLowerCase()
+- trim()
+
+Si lo encontramos, mostramos sus datos.
+Si no, mostramos un mensaje.
+*/
+
 function buscarProductos() {
-  const nombre=document.getElementById("buscador").value;
-  // Normalizamos el nombre del producto a buscar.
+
+  const nombre = document.getElementById("buscador").value;
+
+  // Normalizamos el nombre.
   const nombreNormalizado = nombre.toLowerCase().trim();
 
-  // Buscamos el producto en el array de productos.
+  // Buscamos el producto en el array.
   const productoEncontrado = productos.find(
-    (producto) => producto.nombre.toLowerCase().trim() === nombreNormalizado
+    producto =>
+      producto.nombre.toLowerCase().trim() === nombreNormalizado
   );
 
   // Mostramos el resultado.
   if (productoEncontrado) {
-    document.getElementById("resultado").textContent = "Producto encontrado: " + productoEncontrado.nombre + 
-    " su precio es" + productoEncontrado.precio + " €";
+
+    document.getElementById("resultado").textContent =
+      "Producto encontrado: " + productoEncontrado.nombre +
+      " su precio es " + productoEncontrado.precio + " €";
+
   } else {
-    document.getElementById("resultado").textContent = "Tu producto no ha sido encontrado.";
+
+    document.getElementById("resultado").textContent =
+      "Tu producto no ha sido encontrado.";
   }
 }
-
-/*guardando productos del carro en LocalStorage*/
-
-function guardarCarrito() {
-
-  localStorage.setItem(
-    "MicarritoGuardado",
-  JSON.stringify(carrito)
-  );
-}
-
-guardarCarrito(); 
-
